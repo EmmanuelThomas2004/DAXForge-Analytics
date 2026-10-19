@@ -1,0 +1,16 @@
+1. Create a measure to calculate total sales revenue using Quantity and UnitPrice.
+2. Calculate the average salary of all employees.
+3. Calculate total sales for Delivered orders only.
+4. Calculate the percentage contribution of each product to total revenue.
+5. Rank employees by salary, with the highest salary ranked first.
+
+
+Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])
+
+Average Salary = AVERAGE(Employees[Salary])
+
+Delivered Sales = CALCULATE(SUM(Orders[Amount]), Orders[Status] = "Delivered")
+
+Revenue Contribution % = DIVIDE([Total Revenue], CALCULATE([Total Revenue], ALL(Sales[ProductID])))
+
+Employee Rank = RANKX(ALL(Employees[EmployeeID]), CALCULATE(SUM(Employees[Salary])),, DESC, DENSE)
